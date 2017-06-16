@@ -44,8 +44,8 @@
           <h2>Let's unit test your code</h2>
           <p>by Albert Albala</p>
           <p>@alberto56 - Dcycle.com</p>
-          <p>https://alberto56.github.io/presentation_legacy_code</p>
-          <p><a href="https://github.com/alberto56/presentation_legacy_code">Fork me</a></p>
+          <p>https://alberto56.github.io/presentation_lets_unit_test/#/</p>
+          <p><a href="https://github.com/alberto56/presentation_lets_unit_test">Fork me</a></p>
         </section>
 
         <section>
@@ -54,158 +54,154 @@
             <li>Developers?</li>
             <li>Project managers?</li>
             <li>Themers?</li>
+            <li>Unit testing and PHPUnit experience?</li>
           </ul>
         </section>
 
-        <!-- introductions -->
-
-        <!-- Electrician image: -->
-        <!-- http://bearcreekelectric.com/electrical-contractor-services/3209460 -->
         <section>
-          <img src="images/electrician.png" alt="Photo of an electrician" height="500px"/>
-        </section>
-
-        <section>
-          <img src="images/bad-electricity.png" alt="Overcharged electrical junction box" height="500px"/>
-          <p>"Can we add a light fixture here?"</p>
-        </section>
-
-        <section>
-          <img src="images/building-code.png" alt="The building code of Quebec" height="500px"/>
-        </section>
-
-        <!-- Bad electricity image source: -->
-        <!-- https://www.pinterest.com/pin/284289795202858076/ -->
-
-        <section>
-          <img src="images/bad-electricity.png" alt="Overcharged electrical junction box" height="500px"/>
-          <p>"Sorry, no."</p>
-        </section>
-
-        <section>
-          <h2>"Best practices"</h2>
+          <h2>Topics covered</h2>
           <ul>
-            <li>Automated tests</li>
-            <li>Continuous integration server</li>
-            <li>Known good starting point (do not clone the database)</li>
-            <li>Small pure function that do one thing</li>
-            <li>DevOps (Docker, Vagrant)</li>
-            <li>Mock objects and dependency injection</li>
+            <li>The test pyramid</li>
+            <li>Small functions that do one thing</li>
+            <li>Making legacy code testable</li>
+            <li>Getting value from tests: CI and Docker</li>
+            <li>Cool PHPUnit features: Providers, Mocking, Stubbing, Testing exceptions, Expectations, Traits, Autoloading</li>
+            <li>Why not to use static methods</li>
+            <li>What next?</li>
+            <li>Questions</li>
           </ul>
         </section>
 
-        <!-- Bad code -->
-        <!-- http://rixstep.com/1/1/20070206,00.shtml -->
-        <!-- http://radsoft.net/security/20110405,00.shtml -->
-
         <section>
-          <p>"Can we limit our lists to five items and display a message if there are more than five items?"</p>
+          <h2>The test pyramid</h2>
+          <img src="images/pyramid.png" alt="The test pyramid: unit testing is faster and cheaper; UI testing is slower and more expensive." height="400px"/>
+          <p>Source: https://martinfowler.com/bliki/TestPyramid.html</p>
         </section>
 
         <section>
-          <img src="images/bad-code.png" alt="Spaghetti code visualization" height="500px"/>
-          <p>"Sure (should take about 1 story point)."</p>
-        </section>
-
-        <section>
-          <p>Rule #1 of modifying legacy code.</p>
-          <h2>Don't do it.</h2>
-        </section>
-
-        <section>
-          <h2>Defining <em>legacy</em> code.</h2>
-        </section>
-
-        <section>
-          <h2>"I could never succeed in intelligibly [defining it]. But I know it when I see it".</h2>
-          <p>&mdash;Potter Stewart</p>
-        </section>
-
-        <section>
-          <img src="images/book.png" alt="Book cover: Working effectively with legacy code by Micheal C. Feathers"  height="200px"/><h2>"Code with no test coverage is legacy code."</h2>
-        </section>
-
-        <section>
-          <h2>OK, automated tests; what about the other "best practices"?</h2>
+          <p>To facilitate unit tests:</p>
           <ul>
-            <li>Continuous integration server</li>
-            <li>Known good starting point (do not clone the database)</li>
-            <li>Small pure function that do one thing</li>
-            <li>DevOps (Docker, Vagrant)</li>
-            <li>Mock objects and dependency injection</li>
+            <li>Small functions that do one thing</li>
+            <li>Use objects for everything</li>
           </ul>
         </section>
 
         <section>
-          <h2>Sample legacy code</h2>
-          <code>
-            https://github.com/alberto56/legacy_code_example
-          </code>
+          <pre>
+            public function startEndDates(array $options, array $dates) {
+              switch ($options['fromto']) {
+                case 'value':
+                  return array(
+                    'date1' => $dates['value']['formatted'],
+                    'date2' => $date1,
+                  );
+                case 'value2':
+                  return array(
+                    'date2' => $dates['value2']['formatted'],
+                    'date1' => $date2,
+                  );
+                default:
+                  return array(
+                    'date1' => $dates['value']['formatted'],
+                    'date2' => $dates['value2']['formatted'],
+                  );
+              }
+            }
+          </pre>
         </section>
 
         <section>
-          <h2>What's wrong with this code?</h2>
-          <img src="images/whats-wrong.png" alt="What's wrong with this code? Global variables, the alt() function, incremental ids in code, embedded if statements, un-mockable REST call."  height="500px"/>
-          <p>That's what's wrong.</p>
-        </section>
-
-        <section>
-          <p>Rule #2 of modifying legacy code.</p>
-          <h2>Move legacy code to class methods (still, don't touch it).</h2>
-        </section>
-
-        <section>
-          <p>Rule #3 of modifying legacy code.</p>
-          <h2><em>Surgically</em> add or extract functionality from monster methods.</h2>
-        </section>
-
-        <section>
-          <img src="images/electrician.png" alt="Photo of an electrician"  height="500px"/>
-        </section>
-
-        <section>
-          <img src="images/pyramid.png" alt="The test pyramid: unit tests at the bottom, then service tests, then UI tests."  height="200px"/>
-          <p>Rule #4 of modifying legacy code.</p>
-          <h2>Immediately add <em>unit</em> tests and continuous integration to new code.</h2>
-          <p>Add functional tests (Simpletest, Behat) only if necessary.</p>
-        </section>
-
-        <section>
-          <h2>A word on refactoring.</h2>
-          <p>First, make your code modern and tested and CI-monitored.</p>
-          <p><em>Only then</em>, refactor.</p>
-        </section>
-
-        <section>
-          <img src="images/management.png" alt="A brick wall, meant to represent management"  height="500px"/>
-        </section>
-
-        <section>
-          <h2>Selling this to management:</h2>
+          <h2>Demo</h2>
           <ul>
-            <li>Wait for a catastrophe (data loss, security breach...).</li>
-            <li>Do it covertly (do not tell management).</li>
-            <li>Make them think it's <em>their</em> idea.</li>
-            <li>Tack best practices onto existing workflows, don't replace them.</li>
+            <li>Testing our function with PHPUnit</li>
+            <li>Do not install PHPUnit, use Docker instead</li>
+            <li>Regressions are easy to spot</li>
+            <li>See https://github.com/alberto56/presentation_lets_unit_test_date</li>
           </ul>
         </section>
 
         <section>
-          <img src="images/jenkins-board.png" alt="Jenking board in an office setting"  height="300px"/>
-          <h2>If you <em>are</em> management:</h2>
+          <h2>Making legacy code testable</h2>
           <ul>
-            <li>Request a visible continuous integration dashboard with metrics as artefacts.</li>
-            <li>Give your developers time and resources to think about best practices.</li>
+            <li>Surgically remove the lines of code you want to test</li>
+            <li>Add them as a class method or methods</li>
+            <li>Test the method(s)</li>
+            <li>Only then do you add improvements or fix bugs</li>
           </ul>
         </section>
 
         <section>
-          <h2>Modifying legacy code the right way</h2>
-          <h3>(hint: do not add <em>if</em> statements)</h3>
+          <h2>Getting value from tests: CI and Docker</h2>
+          <ul>
+            <li>See https://circleci.com/gh/alberto56/presentation_lets_unit_test_date</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Providers</h2>
+          <ul>
+            <li>Separate test logic from the data inputs and expected output.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Mocking and stubbing</h2>
+          <ul>
+            <li>Mocking: creating testable <em>objects</em>.</li>
+            <li>Stubbing: creating testable <em>methods</em>.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Testing exceptions</h2>
+        </section>
+
+        <section>
+          <h2>Expectations</h2>
+          <ul>
+            <li>Making sure your method calls other methods a set number of times.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why not to use static methods</h2>
+          <ul>
+            <li>Static methods cannot be stubbed by PHPUnit.</li>
+            <li>Use a singleton instead.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Traits</h2>
+          <ul>
+            <li>Different from inheritance.</li>
+            <li>Allows classes to reuse methods.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Autoloading</h2>
+        </section>
+
+        <section>
+          <h2>What next?</h2>
+          <ul>
+            <li>https://jtreminio.com/2013/03/unit-testing-tutorial-introduction-to-phpunit/</li>
+            <li>https://hub.docker.com/r/phpunit/phpunit/</li>
+            <li>https://circleci.com</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Questions</h2>
+        </section>
+
+        <section>
+          <h2>Let's unit test your code</h2>
           <p>by Albert Albala</p>
           <p>@alberto56 - Dcycle.com</p>
-          <p>https://alberto56.github.io/presentation_legacy_code</p>
-          <p><a href="https://github.com/alberto56/presentation_legacy_code">Fork me</a></p>
+          <p>https://alberto56.github.io/presentation_lets_unit_test/#/</p>
+          <p><a href="https://github.com/alberto56/presentation_lets_unit_test">Fork me</a></p>
         </section>
 
       </div>
