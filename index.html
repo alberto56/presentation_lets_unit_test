@@ -59,16 +59,11 @@
         </section>
 
         <section>
-          <h2>Topics covered</h2>
+          <h2>Flight plan</h2>
           <ul>
-            <li>The test pyramid</li>
-            <li>Small functions that do one thing</li>
-            <li>Making legacy code testable</li>
-            <li>Getting value from tests: CI and Docker</li>
-            <li>Cool PHPUnit features: Providers, Mocking, Stubbing, Testing exceptions, Expectations, Traits, Autoloading</li>
-            <li>Why not to use static methods</li>
-            <li>What next?</li>
-            <li>Questions</li>
+            <li>Basics: The test pyramid</li>
+            <li>Setup: Docker, PHPUnit, GitHub, CircleCI</li>
+            <li>A real-world example: adding testing to the date module</li>
           </ul>
         </section>
 
@@ -79,66 +74,58 @@
         </section>
 
         <section>
-          <p>To facilitate unit tests:</p>
+          <h2>Setup (goal: cheap and simple)</h2>
           <ul>
-            <li>Small functions that do one thing</li>
-            <li>Use objects for everything</li>
+            <li>Docker</li>
+            <li>PHPUnit (runs on Docker so no need to install it)</li>
+            <li>GitHub (free for open source, cheap for private repos)</li>
+            <li>CircleCI (free, supports Docker, private repos)</li>
           </ul>
-        </section>
-
-        <section>
-          <pre>
-            public function startEndDates(array $options, array $dates) {
-              switch ($options['fromto']) {
-                case 'value':
-                  return array(
-                    'date1' => $dates['value']['formatted'],
-                    'date2' => $date1,
-                  );
-                case 'value2':
-                  return array(
-                    'date2' => $dates['value2']['formatted'],
-                    'date1' => $date2,
-                  );
-                default:
-                  return array(
-                    'date1' => $dates['value']['formatted'],
-                    'date2' => $dates['value2']['formatted'],
-                  );
-              }
-            }
-          </pre>
         </section>
 
         <section>
           <h2>Demo</h2>
-          <ul>
-            <li>Testing our function with PHPUnit</li>
-            <li>Do not install PHPUnit, use Docker instead</li>
-            <li>Regressions are easy to spot</li>
-            <li>See https://github.com/alberto56/presentation_lets_unit_test_date</li>
-          </ul>
+          <p>Let's unit test v. 7.x-2.10 of the date module</p>
+          <p>(https://www.drupal.org/project/date)</p>
+          <p> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: initial</code></p>
         </section>
 
         <section>
           <h2>Making legacy code testable</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: initial-test</code></p>
           <ul>
-            <li>Surgically remove the lines of code you want to test</li>
-            <li>Add them as a class method or methods</li>
-            <li>Test the method(s)</li>
-            <li>Only then do you add improvements or fix bugs</li>
+            <li>Use objects</li>
+            <li>Small functions that do one thing</li>
+            <li>Add tests first, then modify code</li>
           </ul>
         </section>
 
         <section>
-          <h2>Getting value from tests: CI and Docker</h2>
-          <ul>
-            <li>See https://circleci.com/gh/alberto56/presentation_lets_unit_test_date</li>
-          </ul>
+          <h2>Run tests on a CI server</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: ci</code></p>
         </section>
 
         <section>
           <h2>Providers</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: provider</code></p>
+          <ul>
+            <li>Separate test logic from the data inputs and expected output.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Add more data to providers</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: provider-multiple</code></p>
           <ul>
             <li>Separate test logic from the data inputs and expected output.</li>
           </ul>
@@ -146,6 +133,10 @@
 
         <section>
           <h2>Mocking and stubbing</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: non-pure</code></p>
+          <p><code>tag: mock-stub</code></p>
           <ul>
             <li>Mocking: creating testable <em>objects</em>.</li>
             <li>Stubbing: creating testable <em>methods</em>.</li>
@@ -154,17 +145,26 @@
 
         <section>
           <h2>Testing exceptions</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: exception</code></p>
         </section>
 
         <section>
           <h2>Expectations</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: expectations</code></p>
           <ul>
             <li>Making sure your method calls other methods a set number of times.</li>
           </ul>
         </section>
 
         <section>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
           <h2>Why not to use static methods</h2>
+          <p><code>tag: singleton</code></p>
           <ul>
             <li>Static methods cannot be stubbed by PHPUnit.</li>
             <li>Use a singleton instead.</li>
@@ -173,6 +173,9 @@
 
         <section>
           <h2>Traits</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: traits</code></p>
           <ul>
             <li>Different from inheritance.</li>
             <li>Allows classes to reuse methods.</li>
@@ -181,6 +184,9 @@
 
         <section>
           <h2>Autoloading</h2>
+          <p style="color: #777;"> https://github.com/alberto56/presentation_lets_unit_test_date</li>
+          </p>
+          <p><code>tag: autoloader</code></p>
         </section>
 
         <section>
